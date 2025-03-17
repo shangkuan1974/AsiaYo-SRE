@@ -1,0 +1,27 @@
+adam@master:~/k8s/CKA/lab$ kubectl get po -n ingress-nginx 
+NAME                                       READY   STATUS    RESTARTS   AGE
+ingress-nginx-controller-974f4cbd8-g6pbq   1/1     Running   0          4d11h
+adam@master:~/k8s/CKA/lab$ curl -k -H "HOST: asiayo.com" https://10.244.5.6
+Hello! asiayo.com
+adam@master:~/k8s/CKA/lab$ kubectl get deploy,svc,ep,ingress,pv,pvc 
+NAME                        READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/lab-09-01   0/1     1            0           7h6m
+deployment.apps/web         3/3     3            3           58m
+
+NAME          TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
+service/web   ClusterIP   10.106.11.217   <none>        80/TCP    56m
+
+NAME            ENDPOINTS                                        AGE
+endpoints/web   10.244.19.83:80,10.244.30.89:80,10.244.5.27:80   56m
+
+NAME                            CLASS   HOSTS        ADDRESS   PORTS     AGE
+ingress.networking.k8s.io/www   nginx   asiayo.com             80, 443   40m
+
+NAME                      CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM          STORAGECLASS   VOLUMEATTRIBUTESCLASS   REASON   AGE
+persistentvolume/pv-web   2Gi        ROX            Retain           Bound    demo/pvc-web   low            <unset>                          64m
+
+NAME                            STATUS   VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+persistentvolumeclaim/pvc-web   Bound    pv-web   2Gi        ROX            low            <unset>                 64m
+adam@master:~/k8s/CKA/lab$ curl -k -H "HOST: asiayo.com" https://10.244.5.6
+Hello! asiayo.com
+adam@master:~/k8s/CKA/lab$ 
