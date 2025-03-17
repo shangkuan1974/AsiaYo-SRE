@@ -4,4 +4,4 @@ do
   printf '%s\n' "${word//[[:space:]]}" >> temp.txt
 done
 
-cat temp.txt | sort | uniq -c | sort -r
+cat temp.txt | sort | uniq -c | sort -r | head -n 1
