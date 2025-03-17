@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-web
+spec:
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: low
+  accessModes:
+    - ReadOnlyMany
+  capacity:
+    storage: 2Gi
+  nfs:
+    server: 192.168.221.20
+    path: /export/volume/web
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-web
+  namespace: asiayo
+spec:
+  storageClassName: low
+  accessModes:
+    - ReadOnlyMany
+  resources:
+    requests:
+      storage: 2Gi

@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  creationTimestamp: null
+  name: www
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: asiayo.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: web
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - asiayo.com
+    secretName: asiayo-com
+status:
+  loadBalancer: {}
