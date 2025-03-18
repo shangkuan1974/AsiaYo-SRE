@@ -2,7 +2,6 @@
 
 - 綜合應用測驗
   - [session01](./session-01/words.bash)
-  - [session02](./session-02/README.md)
   - session02
     - lab01
       - terraform code
